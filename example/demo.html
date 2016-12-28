@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>demo</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+	<style media="screen">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		body {
+			padding: 100px 20%;
+			font-family: '微软雅黑';
+		}
+
+		#app {
+			position: relative;
+			text-align: center;
+		}
+
+		img{
+			display: block;
+			width: 400px;
+			margin: 10px auto;
+		}
+
+	</style>
+</head>
+
+<body>
+	<div id="app">
+		<img v-lazy="img" v-for="img in imgs">
+	</div>
+
+	<script src="demo-src.js"></script>
+</body>
+
+</html>
