@@ -24,6 +24,7 @@ vue@1.0 + webpack + es6
 $ npm install vue-image-lazy
 ```
 
+## Usage
 #### Example
 ```html
 <div id="app">
