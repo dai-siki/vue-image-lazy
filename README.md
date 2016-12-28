@@ -34,7 +34,7 @@ $ npm install vue-image-lazy
 <script>
 	import 'babel-polyfill'; // es6 shim
 	import Vue from 'vue';
-	import mySwitch from 'vue-image-lazy';
+	import vueLazy from 'vue-image-lazy';
 
     Vue.use(vueLazy, {
     	loading: 'imgs/default.jpg', //default image, if element has 'src' attribute, ignore this
