@@ -2,7 +2,7 @@
   "name": "vue-image-lazy",
   "version": "1.0.0",
   "description": "A image lazy loading plugin for vue. （vue图片懒加载插件）",
-  "main": "upload.vue",
+  "main": "lazy.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
