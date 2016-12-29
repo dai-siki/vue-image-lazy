@@ -22,6 +22,7 @@ export default {
 				let that = this,
 					{el} = that;
 
+				// 单纯地给图片元素添加滚动事件
 				const updateSrc = function(){
 					if (el.nodeName.toLowerCase() === 'img') {
 						let handleScroll = function() {
@@ -36,15 +37,18 @@ export default {
 					}
 				};
 
-				if (!el.getAttribute('src') && opts.loading) {
-					el.setAttribute('src', opts.loading);
-					const iniHandleLoad = function () {
-						el.removeEventListener('load', iniHandleLoad);
+				// 根据是否有loading图片
+				if(value !== oValue){
+					if(opts.loading){
+						el.setAttribute('src', opts.loading);
+						const iniHandleLoad = function () {
+							el.removeEventListener('load', iniHandleLoad);
+							updateSrc();
+						};
+						el.addEventListener('load', iniHandleLoad);
+					}else{
 						updateSrc();
-					};
-					el.addEventListener('load', iniHandleLoad);
-				}else if(value !== oValue){
-					updateSrc();
+					}
 				}
 			}
 		});

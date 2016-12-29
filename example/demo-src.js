@@ -19141,7 +19141,7 @@
 					var that = this,
 					    el = that.el;
 
-
+					// 单纯地给图片元素添加滚动事件
 					var updateSrc = function updateSrc() {
 						if (el.nodeName.toLowerCase() === 'img') {
 							(function () {
@@ -19158,17 +19158,20 @@
 						}
 					};
 
-					if (!el.getAttribute('src') && opts.loading) {
-						(function () {
-							el.setAttribute('src', opts.loading);
-							var iniHandleLoad = function iniHandleLoad() {
-								el.removeEventListener('load', iniHandleLoad);
-								updateSrc();
-							};
-							el.addEventListener('load', iniHandleLoad);
-						})();
-					} else if (value !== oValue) {
-						updateSrc();
+					// 根据是否有loading图片
+					if (value !== oValue) {
+						if (opts.loading) {
+							(function () {
+								el.setAttribute('src', opts.loading);
+								var iniHandleLoad = function iniHandleLoad() {
+									el.removeEventListener('load', iniHandleLoad);
+									updateSrc();
+								};
+								el.addEventListener('load', iniHandleLoad);
+							})();
+						} else {
+							updateSrc();
+						}
 					}
 				}
 			});
