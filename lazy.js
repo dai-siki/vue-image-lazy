@@ -17,14 +17,12 @@ export default {
 				let that = this, {el} = that;
                 // 初始化懒加载状态 0未开始 1加载中 2加载成功 3加载失败
 				el.setAttribute('lazyStatus', '0');
-				if (!el.getAttribute('src') && opts.loading) {
-					el.setAttribute('src', opts.loading);
-				}
 			},
 			update(value, oValue) {
-				let that = this, {el} = that;
+				let that = this,
+					{el} = that;
 
-				if (value !== oValue) {
+				const updateSrc = function(){
 					if (el.nodeName.toLowerCase() === 'img') {
 						let handleScroll = function() {
 							imgLoad(el, value, handleScroll);
@@ -36,9 +34,19 @@ export default {
                         // 滚动事件绑定
 						window.addEventListener('scroll', handleScroll);
 					}
+				};
+
+				if (!el.getAttribute('src') && opts.loading) {
+					el.setAttribute('src', opts.loading);
+					const iniHandleLoad = function () {
+						el.removeEventListener('load', iniHandleLoad);
+						updateSrc();
+					};
+					el.addEventListener('load', iniHandleLoad);
+				}else if(value !== oValue){
+					updateSrc();
 				}
-			},
-			unbind() {}
+			}
 		});
 
         // 判断元素是否在屏幕范围内
@@ -62,7 +70,7 @@ export default {
 						imgLoadSucc(el, handleScroll);
 						imgLoadError(el, handleScroll);
 					}
-				}, 300);
+				}, 400);
 			}
 		}
 

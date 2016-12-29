@@ -19136,15 +19136,13 @@
 					    el = that.el;
 					// 初始化懒加载状态 0未开始 1加载中 2加载成功 3加载失败
 					el.setAttribute('lazyStatus', '0');
-					if (!el.getAttribute('src') && opts.loading) {
-						el.setAttribute('src', opts.loading);
-					}
 				},
 				update: function update(value, oValue) {
 					var that = this,
 					    el = that.el;
 
-					if (value !== oValue) {
+
+					var updateSrc = function updateSrc() {
 						if (el.nodeName.toLowerCase() === 'img') {
 							(function () {
 								var handleScroll = function handleScroll() {
@@ -19158,9 +19156,21 @@
 								window.addEventListener('scroll', handleScroll);
 							})();
 						}
+					};
+
+					if (!el.getAttribute('src') && opts.loading) {
+						(function () {
+							el.setAttribute('src', opts.loading);
+							var iniHandleLoad = function iniHandleLoad() {
+								el.removeEventListener('load', iniHandleLoad);
+								updateSrc();
+							};
+							el.addEventListener('load', iniHandleLoad);
+						})();
+					} else if (value !== oValue) {
+						updateSrc();
 					}
-				},
-				unbind: function unbind() {}
+				}
 			});
 
 			// 判断元素是否在屏幕范围内
@@ -19184,7 +19194,7 @@
 							imgLoadSucc(el, handleScroll);
 							imgLoadError(el, handleScroll);
 						}
-					}, 300);
+					}, 400);
 				}
 			}
 
