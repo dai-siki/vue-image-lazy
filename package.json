@@ -1,6 +1,6 @@
 {
   "name": "vue-image-lazy",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A image lazy loading plugin for vue. （vue图片懒加载插件）",
   "main": "lazy.js",
   "scripts": {
