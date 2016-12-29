@@ -95,6 +95,12 @@ export default {
 			function handleError() {
 				el.setAttribute('src', opts.error);
 				el.removeEventListener('error', handleError);
+				// 点击再次尝试加载
+				const reloadImg = function () {
+					handleScroll();
+					el.removeEventListener('click', reloadImg);
+				};
+				el.addEventListener('click', reloadImg);
 			}
 			if (opts.error) {
 				el.addEventListener('error', handleError);

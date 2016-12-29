@@ -19218,6 +19218,12 @@
 				function handleError() {
 					el.setAttribute('src', opts.error);
 					el.removeEventListener('error', handleError);
+					// 点击再次尝试加载
+					var reloadImg = function reloadImg() {
+						handleScroll();
+						el.removeEventListener('click', reloadImg);
+					};
+					el.addEventListener('click', reloadImg);
 				}
 				if (opts.error) {
 					el.addEventListener('error', handleError);
